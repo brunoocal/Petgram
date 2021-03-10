@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from "styled-components";
 import { skeletonStyle } from "../../styles/skeleton/style";
+import { Link as LinkRouter} from "@reach/router";
 
 const fadeInKeyframes = keyframes`
   from {
@@ -36,13 +37,14 @@ export const CategoryTitle = styled.div`
   `}
 `;
 
-export const Anchor = styled.a`
+export const Link = styled(LinkRouter)`
   display: flex;
   flex-direction: column;
   text-align: center;
   text-decoration: none;
   width: 75px;
 `;
+
 export const Image = styled.img`
   border: 1px solid #ddd;
   border-radius: 50%;

@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 
 import { ContainerPhotoCardSkeleton, PhotoCardImageSkeleton } from "./styles";
+import { FavButton } from "../FavButton";
+import { ToggleLikeMutation } from "../../containers/ToggleLikeMutation";
 
 const DEFAULT_IMAGE =
   "https://res.cloudinary.com/midudev/image/upload/w_300/q_80/v1560262103/dogs.png";
@@ -14,7 +16,6 @@ import {
   Likes,
 } from "./styles";
 
-import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useNearScreen } from "../../hooks/useNearScreen";
 
@@ -23,8 +24,6 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
   const [show, element] = useNearScreen();
   const key = `like-${id}`;
   const [liked, setLiked] = useLocalStorage(key, false);
-
-  const Icon = liked ? MdFavorite : MdFavoriteBorder;
 
   return (
     <Article ref={element}>
@@ -36,12 +35,22 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
             </ImgWrapper>
           </a>
 
-          <Button onClick={() => setLiked(!liked)}>
-            <Icon size="36px" />
-          </Button>
-          <LikeContainer>
-            <Likes>{likes}</Likes>
-          </LikeContainer>
+          <ToggleLikeMutation>
+            {(toggleLike) => {
+              const handleFavClick = () => {
+                !liked && toggleLike({ variables: { input: { id } } });
+                setLiked(!liked);
+              };
+
+              return (
+                <FavButton
+                  liked={liked}
+                  likes={likes}
+                  onClick={handleFavClick}
+                />
+              );
+            }}
+          </ToggleLikeMutation>
         </>
       ) : null}
     </Article>
