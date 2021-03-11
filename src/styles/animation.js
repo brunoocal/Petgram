@@ -12,6 +12,16 @@ const fadeInKeyframes = keyframes`
   }
 `;
 
+const fadeInSimpleKeyframes = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`;
+
 const flipYKeyFrames = keyframes`
   from {
     transform: rotateY(90deg);
@@ -36,6 +46,10 @@ const fadeInRightClipPath = keyframes`
 
 export const fadeIn = ({ time = "1s", type = "ease" } = {}) => css`
   animation: ${time} ${fadeInKeyframes} ${type};
+`;
+
+export const fadeInSimple = ({ time = "1s", type = "ease" } = {}) => css`
+  animation: ${time} ${fadeInSimpleKeyframes} ${type};
 `;
 
 export const flipX = ({
