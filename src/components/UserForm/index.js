@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import {
   Container,
@@ -52,6 +52,12 @@ export const UserForm = ({ onSubmit, forLogin }) => {
     }
   };
 
+  const handleClickOnButton = (e) => {
+    if (!email.verificated.validated && !password.verificated.validated) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <>
       <Container>
@@ -59,7 +65,7 @@ export const UserForm = ({ onSubmit, forLogin }) => {
           <GiDogHouse size="100%" color="#d001a2" />
         </IconContainer>
         <Form onSubmit={onSubmit} action="">
-          {forLogin ? <Title>Log in</Title> : <Title>Sign up</Title>}
+          {isLogin ? <Title>Log in</Title> : <Title>Sign up</Title>}
           <Input
             placeholder="Email"
             type="text"
@@ -86,10 +92,11 @@ export const UserForm = ({ onSubmit, forLogin }) => {
             </InputErrorLabel>
           )}
 
-          {console.log(password, email)}
-          {forLogin && <p>Forgot your password?</p>}
-          <Button>{forLogin ? "Log in" : "Sign up"}</Button>
-          {forLogin ? (
+          {isLogin && <p>Forgot your password?</p>}
+          <Button type="submit" onClick={handleClickOnButton}>
+            {isLogin ? "Log in" : "Sign up"}
+          </Button>
+          {isLogin ? (
             <Text>
               You are not registered? <Span>Sign up</Span>
             </Text>

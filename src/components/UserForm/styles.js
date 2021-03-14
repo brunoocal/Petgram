@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 import { fadeInSimple } from "../../styles/animation";
 
@@ -119,3 +119,4 @@ export const Span = styled.span`
   font-size: 18px;
   text-align: center;
 `;
+
